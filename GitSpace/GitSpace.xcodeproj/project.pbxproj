@@ -7,6 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1128A4732632F7650073A40A /* UserNotedCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1128A4722632F7650073A40A /* UserNotedCell.swift */; };
+		1128A4782632F9800073A40A /* UserNotedCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1128A4772632F9800073A40A /* UserNotedCellModel.swift */; };
+		1128A4812632FADE0073A40A /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1128A4802632FADE0073A40A /* Network.swift */; };
+		1128A4892632FCC40073A40A /* GithubUserEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1128A4882632FCC40073A40A /* GithubUserEntity.swift */; };
+		1128A48F2632FDFD0073A40A /* UserListGateway.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1128A48E2632FDFD0073A40A /* UserListGateway.swift */; };
+		1128A4942632FE830073A40A /* ApiUserListGateway.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1128A4932632FE830073A40A /* ApiUserListGateway.swift */; };
+		1128A4992632FF910073A40A /* UserListUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1128A4982632FF910073A40A /* UserListUseCase.swift */; };
 		11B041D12631D50500BD4982 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11B041D02631D50500BD4982 /* AppDelegate.swift */; };
 		11B041D32631D50500BD4982 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11B041D22631D50500BD4982 /* SceneDelegate.swift */; };
 		11B041DB2631D50500BD4982 /* GitSpace.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 11B041D92631D50500BD4982 /* GitSpace.xcdatamodeld */; };
@@ -47,6 +54,13 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1128A4722632F7650073A40A /* UserNotedCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserNotedCell.swift; sourceTree = "<group>"; };
+		1128A4772632F9800073A40A /* UserNotedCellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserNotedCellModel.swift; sourceTree = "<group>"; };
+		1128A4802632FADE0073A40A /* Network.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Network.swift; sourceTree = "<group>"; };
+		1128A4882632FCC40073A40A /* GithubUserEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GithubUserEntity.swift; sourceTree = "<group>"; };
+		1128A48E2632FDFD0073A40A /* UserListGateway.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserListGateway.swift; sourceTree = "<group>"; };
+		1128A4932632FE830073A40A /* ApiUserListGateway.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiUserListGateway.swift; sourceTree = "<group>"; };
+		1128A4982632FF910073A40A /* UserListUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserListUseCase.swift; sourceTree = "<group>"; };
 		11B041CD2631D50500BD4982 /* GitSpace.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GitSpace.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		11B041D02631D50500BD4982 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		11B041D22631D50500BD4982 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -100,6 +114,46 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1128A47C2632FAA20073A40A /* Gateways */ = {
+			isa = PBXGroup;
+			children = (
+				1128A48E2632FDFD0073A40A /* UserListGateway.swift */,
+			);
+			path = Gateways;
+			sourceTree = "<group>";
+		};
+		1128A47D2632FAA70073A40A /* UseCases */ = {
+			isa = PBXGroup;
+			children = (
+				1128A4982632FF910073A40A /* UserListUseCase.swift */,
+			);
+			path = UseCases;
+			sourceTree = "<group>";
+		};
+		1128A47E2632FAAC0073A40A /* Entities */ = {
+			isa = PBXGroup;
+			children = (
+				1128A4882632FCC40073A40A /* GithubUserEntity.swift */,
+			);
+			path = Entities;
+			sourceTree = "<group>";
+		};
+		1128A47F2632FABF0073A40A /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				1128A4802632FADE0073A40A /* Network.swift */,
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
+		1128A48D2632FDD50073A40A /* ApiGateways */ = {
+			isa = PBXGroup;
+			children = (
+				1128A4932632FE830073A40A /* ApiUserListGateway.swift */,
+			);
+			path = ApiGateways;
+			sourceTree = "<group>";
+		};
 		11B041C42631D50500BD4982 = {
 			isa = PBXGroup;
 			children = (
@@ -126,6 +180,7 @@
 				11B042122631D75D00BD4982 /* App */,
 				11B042242631D8A600BD4982 /* Scene */,
 				11B042252631D8AB00BD4982 /* Core */,
+				1128A47F2632FABF0073A40A /* Network */,
 				11B042412631D99100BD4982 /* Utils */,
 			);
 			path = GitSpace;
@@ -174,6 +229,10 @@
 		11B042252631D8AB00BD4982 /* Core */ = {
 			isa = PBXGroup;
 			children = (
+				1128A47E2632FAAC0073A40A /* Entities */,
+				1128A47D2632FAA70073A40A /* UseCases */,
+				1128A47C2632FAA20073A40A /* Gateways */,
+				1128A48D2632FDD50073A40A /* ApiGateways */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -183,8 +242,8 @@
 			children = (
 				11B0425E2631E6B000BD4982 /* TableComponents */,
 				11B042282631D8FB00BD4982 /* UsersListPresenter.swift */,
-				11B042292631D8FB00BD4982 /* UsersListRouter.swift */,
 				11B0422A2631D8FB00BD4982 /* UsersListController.swift */,
+				11B042292631D8FB00BD4982 /* UsersListRouter.swift */,
 				11B0422B2631D8FB00BD4982 /* UsersListConfigurator.swift */,
 			);
 			path = UsersList;
@@ -248,6 +307,8 @@
 		11B042622631E71B00BD4982 /* Noted */ = {
 			isa = PBXGroup;
 			children = (
+				1128A4722632F7650073A40A /* UserNotedCell.swift */,
+				1128A4772632F9800073A40A /* UserNotedCellModel.swift */,
 			);
 			path = Noted;
 			sourceTree = "<group>";
@@ -385,14 +446,21 @@
 				11B041DB2631D50500BD4982 /* GitSpace.xcdatamodeld in Sources */,
 				11B042642631E73700BD4982 /* UserNormalCell.swift in Sources */,
 				11B0422C2631D8FB00BD4982 /* UsersListPresenter.swift in Sources */,
+				1128A4892632FCC40073A40A /* GithubUserEntity.swift in Sources */,
+				1128A4732632F7650073A40A /* UserNotedCell.swift in Sources */,
 				11B0423D2631D90B00BD4982 /* UserProfileConfigurator.swift in Sources */,
 				11B0422E2631D8FB00BD4982 /* UsersListController.swift in Sources */,
 				11B0426C2631E7C900BD4982 /* Reusable.swift in Sources */,
+				1128A4992632FF910073A40A /* UserListUseCase.swift in Sources */,
 				11B0423B2631D90B00BD4982 /* UserProfileRouter.swift in Sources */,
 				11B042712631F8AC00BD4982 /* CellConfiguration.swift in Sources */,
 				11B0424E2631D9AC00BD4982 /* Configurable.swift in Sources */,
 				11B041D12631D50500BD4982 /* AppDelegate.swift in Sources */,
+				1128A48F2632FDFD0073A40A /* UserListGateway.swift in Sources */,
+				1128A4812632FADE0073A40A /* Network.swift in Sources */,
 				11B0423A2631D90B00BD4982 /* UserProfilePresenter.swift in Sources */,
+				1128A4942632FE830073A40A /* ApiUserListGateway.swift in Sources */,
+				1128A4782632F9800073A40A /* UserNotedCellModel.swift in Sources */,
 				11B041D32631D50500BD4982 /* SceneDelegate.swift in Sources */,
 				11B042772631F9D200BD4982 /* UserNormalCellModel.swift in Sources */,
 				11B0423C2631D90B00BD4982 /* UserProfileController.swift in Sources */,

@@ -16,9 +16,12 @@ class UsersListConfiguratorImpl: UsersListConfigurator {
     func configure(_ controller: UsersListController) {
         let router: UsersListRouter = UsersListRouterImpl(controller)
         
+        let userListUseCase = UserListUseCaseImpl(gateway: ApiUserListGateway())
+        
         let presenter: UsersListPresenter = UsersListPresenterImpl(
             view: controller,
-            router: router
+            router: router,
+            userListUseCase: userListUseCase
         )
         
         controller.presenter = presenter

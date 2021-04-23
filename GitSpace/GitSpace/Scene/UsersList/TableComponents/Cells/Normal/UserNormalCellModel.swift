@@ -13,8 +13,9 @@ struct UserNormalCellModel: CellModel {
         UserNormalCell.reuseIdentifier
     }
     
+    let id: Int
     let username: String
     let details: String
-    //let avatar: UIImage
+    let avatarUrl: String
     
 }

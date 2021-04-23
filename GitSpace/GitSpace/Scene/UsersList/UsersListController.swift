@@ -43,17 +43,11 @@ class UsersListController: UIViewController {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(UserNormalCell.self)
+        tableView.register(UserNotedCell.self)
         return tableView
     }()
 
-    var presenter: UsersListPresenter?
-
-    var dataSource: [CellModel] = [
-        UserNormalCellModel(username: "Tim", details: "Wow"),
-        UserNormalCellModel(username: "Steve", details: "💊"),
-        UserNormalCellModel(username: "Bill", details: "Hello darkness my old friend")
-    ]
-    
+    var presenter: UsersListPresenter!
     
 }
 
@@ -63,6 +57,7 @@ extension UsersListController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setup()
+        presenter?.viewDidLoad()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -125,11 +120,11 @@ extension UsersListController: UITableViewDelegate {
 extension UsersListController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return dataSource.count
+        return presenter.tableDataSource.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let model = dataSource[indexPath.row]
+        let model = presenter.tableDataSource[indexPath.row]
         let dequeued = tableView.dequeueReusableCell(withIdentifier: model.cellIdentifier, for: indexPath)
         let cell = dequeued as! CellViewModel
         cell.configure(with: model)
@@ -139,6 +134,10 @@ extension UsersListController: UITableViewDataSource {
 }
 
 extension UsersListController: UsersListView {
+    
+    func reloadList() {
+        tableView.reloadData()
+    }
     
 }
 
