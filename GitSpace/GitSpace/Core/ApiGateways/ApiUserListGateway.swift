@@ -10,7 +10,7 @@ import Foundation
 struct ApiUserListGateway: UserListGateway {
     
     func fetchUsers(since id: Int, completion: @escaping UserListCompletion) {
-        guard let url = URL(string: "https://api.github.com/users?since=\(id)%E2%80%8B") else {
+        guard let url = URL(string: "https://api.github.com/users?since=\(id)") else {
             completion(.failure(InvalidUrlError()))
             return
         }

@@ -8,17 +8,21 @@
 import Foundation
 
 protocol UserProfileConfigurator {
-    func configure(_ controller: UserProfileController)
+    func configure(_ controller: UserProfileController, username: String)
 }
 
 class UserProfileConfiguratorImpl: UserProfileConfigurator {
     
-    func configure(_ controller: UserProfileController) {
+    func configure(_ controller: UserProfileController, username: String) {
         let router: UserProfileRouter = UserProfileRouterImpl(controller)
+        
+        let userProfileUseCase = UserProfileUseCaseImpl(gateway: ApiUserProfileGateway())
         
         let presenter: UserProfilePresenter = UserProfilePresenterImpl(
             view: controller,
-            router: router
+            router: router,
+            userProfileUseCase: userProfileUseCase,
+            username: username
         )
         
         controller.presenter = presenter

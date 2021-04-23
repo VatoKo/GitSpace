@@ -1,5 +1,5 @@
 //
-//  Network.swift
+//  Fetcher.swift
 //  GitSpace
 //
 //  Created by Vakhtang Kostava on 23.04.21.
