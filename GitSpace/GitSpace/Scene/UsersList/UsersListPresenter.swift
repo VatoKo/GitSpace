@@ -12,7 +12,7 @@ protocol UsersListView: AnyObject {
 }
 
 protocol UsersListPresenter {
-    var tableDataSource: [CellModel] { get set }
+    var tableDataSource: [UserCell] { get set }
     func viewDidLoad()
     func didSelectItem(at index: Int)
 }
@@ -24,7 +24,7 @@ class UsersListPresenterImpl: UsersListPresenter {
             
     private let userListUseCase: UserListUseCase
     
-    var tableDataSource: [CellModel] = .init() {
+    var tableDataSource: [UserCell] = .init() {
         didSet {
             view?.reloadList()
         }
@@ -56,8 +56,7 @@ class UsersListPresenterImpl: UsersListPresenter {
     }
     
     func didSelectItem(at index: Int) {
-        // TODO: Write generic solution for accessing username property
-        let itemModel = tableDataSource[index] as! UserNormalCellModel
+        let itemModel = tableDataSource[index]
         router.navigateToUserProfile(with: itemModel.username)
     }
     

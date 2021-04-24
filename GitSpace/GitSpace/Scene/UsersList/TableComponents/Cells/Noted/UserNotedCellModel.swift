@@ -7,14 +7,14 @@
 
 import Foundation
 
-struct UserNotedCellModel: CellModel {
+struct UserNotedCellModel: UserCell {
     
     var cellIdentifier: String {
         return UserNotedCell.reuseIdentifier
     }
     
     let id: Int
-    let username: String
+    var username: String
     let details: String
     let avatarUrl: String
     

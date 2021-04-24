@@ -11,6 +11,21 @@ class UserProfileController: UIViewController {
     
     // MARK: Internal Components
     
+    var contentScrollView: UIScrollView = {
+        let scrollView = UIScrollView()
+        scrollView.translatesAutoresizingMaskIntoConstraints = false
+        scrollView.bounces = true
+        scrollView.alwaysBounceVertical = true
+        scrollView.showsVerticalScrollIndicator = false
+        return scrollView
+    }()
+    
+    var contentView: UIView = {
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
     private let avatarContainerView: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -111,7 +126,7 @@ class UserProfileController: UIViewController {
     private let noteInput: UITextView = {
         let textView = UITextView()
         textView.translatesAutoresizingMaskIntoConstraints = false
-        
+        textView.font = .systemFont(ofSize: 13, weight: .regular)
         textView.layer.borderWidth = 1
         textView.layer.borderColor = UIColor.black.cgColor
         return textView
@@ -149,6 +164,9 @@ extension UserProfileController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        hideKeyboardOnBlankTap()
+        addKeyboardNotificationListeners()
+        setupKeyboardResponsiveLayout()
         setup()
         presenter?.viewDidLoad()
     }
@@ -159,6 +177,9 @@ extension UserProfileController {
 extension UserProfileController {
     
     private func setup() {
+        if #available(iOS 13.0, *) {
+            overrideUserInterfaceStyle = .light
+        }
         view.backgroundColor = .white
         navigationController?.navigationBar.tintColor = .black
         navigationController?.navigationBar.topItem?.title = String()
@@ -169,26 +190,26 @@ extension UserProfileController {
     }
     
     private func addSubviews() {
-        view.addSubview(avatarContainerView)
+        contentView.addSubview(avatarContainerView)
         avatarContainerView.addSubview(avatarImage)
-        view.addSubview(connectionsContainerStack)
+        contentView.addSubview(connectionsContainerStack)
         connectionsContainerStack.addArrangedSubview(followersLabel)
         connectionsContainerStack.addArrangedSubview(followingLabel)
-        view.addSubview(infoContainerView)
+        contentView.addSubview(infoContainerView)
         infoContainerView.addSubview(infoContainerStack)
         infoContainerStack.addArrangedSubview(nameLabel)
         infoContainerStack.addArrangedSubview(companyLabel)
         infoContainerStack.addArrangedSubview(blogLabel)
-        view.addSubview(notesTitleLabel)
-        view.addSubview(noteInput)
-        view.addSubview(saveButton)
+        contentView.addSubview(notesTitleLabel)
+        contentView.addSubview(noteInput)
+        contentView.addSubview(saveButton)
     }
     
     private func setupConstraints() {
         NSLayoutConstraint.activate([
-            avatarContainerView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            avatarContainerView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 1),
-            avatarContainerView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -1),
+            avatarContainerView.topAnchor.constraint(equalTo: contentView.topAnchor),
+            avatarContainerView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 1),
+            avatarContainerView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -1),
             avatarContainerView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.25)
         ])
         
@@ -201,14 +222,14 @@ extension UserProfileController {
         
         NSLayoutConstraint.activate([
             connectionsContainerStack.topAnchor.constraint(equalTo: avatarContainerView.bottomAnchor, constant: 8),
-            connectionsContainerStack.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            connectionsContainerStack.trailingAnchor.constraint(equalTo: view.trailingAnchor)
+            connectionsContainerStack.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+            connectionsContainerStack.trailingAnchor.constraint(equalTo: contentView.trailingAnchor)
         ])
         
         NSLayoutConstraint.activate([
             infoContainerView.topAnchor.constraint(equalTo: connectionsContainerStack.bottomAnchor, constant: 8),
-            infoContainerView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 8),
-            infoContainerView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -8)
+            infoContainerView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 8),
+            infoContainerView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -8)
         ])
         
         NSLayoutConstraint.activate([
@@ -220,19 +241,19 @@ extension UserProfileController {
         
         NSLayoutConstraint.activate([
             notesTitleLabel.topAnchor.constraint(equalTo: infoContainerView.bottomAnchor, constant: 16),
-            notesTitleLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 8)
+            notesTitleLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 8)
         ])
         
         NSLayoutConstraint.activate([
             noteInput.topAnchor.constraint(equalTo: notesTitleLabel.bottomAnchor, constant: 4),
-            noteInput.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 8),
-            noteInput.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -8),
+            noteInput.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 8),
+            noteInput.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -8),
             noteInput.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.2)
         ])
         
         NSLayoutConstraint.activate([
             saveButton.topAnchor.constraint(equalTo: noteInput.bottomAnchor, constant: 16),
-            saveButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            saveButton.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
             saveButton.widthAnchor.constraint(equalToConstant: 50)
         ])
     }
@@ -277,6 +298,14 @@ extension UserProfileController: UserProfileView {
         nameLabel.text = "Name: \(profileInfo.name)"
         companyLabel.text = "Company: \(profileInfo.company ?? "N/A")"
         blogLabel.text = "Blog: \(profileInfo.blog.isEmpty ? "N/A" : profileInfo.blog)"
+    }
+    
+}
+
+extension UserProfileController: KeyboardResponsive {
+    
+    var keyboardAlignedToView: UIView {
+        return saveButton
     }
     
 }

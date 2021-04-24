@@ -7,14 +7,18 @@
 
 import UIKit
 
-struct UserNormalCellModel: CellModel {
+protocol UserCell: CellModel {
+    var username: String { get set }
+}
+
+struct UserNormalCellModel: UserCell {
     
     var cellIdentifier: String {
         UserNormalCell.reuseIdentifier
     }
     
     let id: Int
-    let username: String
+    var username: String
     let details: String
     let avatarUrl: String
     

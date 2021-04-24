@@ -18,6 +18,8 @@
 		1128A4CE26334A1B0073A40A /* UserProfileGateway.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1128A4CD26334A1B0073A40A /* UserProfileGateway.swift */; };
 		1128A4D326334ACA0073A40A /* ApiUserProfileGateway.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1128A4D226334ACA0073A40A /* ApiUserProfileGateway.swift */; };
 		1128A4D826334BCF0073A40A /* UserProfileUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1128A4D726334BCF0073A40A /* UserProfileUseCase.swift */; };
+		1128A4E6263447750073A40A /* KeyboardResponsive.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1128A4E5263447750073A40A /* KeyboardResponsive.swift */; };
+		1128A4EC263448EF0073A40A /* UIViewControllerExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1128A4EB263448EF0073A40A /* UIViewControllerExtensions.swift */; };
 		11B041D12631D50500BD4982 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11B041D02631D50500BD4982 /* AppDelegate.swift */; };
 		11B041D32631D50500BD4982 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11B041D22631D50500BD4982 /* SceneDelegate.swift */; };
 		11B041DB2631D50500BD4982 /* GitSpace.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 11B041D92631D50500BD4982 /* GitSpace.xcdatamodeld */; };
@@ -69,6 +71,8 @@
 		1128A4CD26334A1B0073A40A /* UserProfileGateway.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileGateway.swift; sourceTree = "<group>"; };
 		1128A4D226334ACA0073A40A /* ApiUserProfileGateway.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiUserProfileGateway.swift; sourceTree = "<group>"; };
 		1128A4D726334BCF0073A40A /* UserProfileUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileUseCase.swift; sourceTree = "<group>"; };
+		1128A4E5263447750073A40A /* KeyboardResponsive.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardResponsive.swift; sourceTree = "<group>"; };
+		1128A4EB263448EF0073A40A /* UIViewControllerExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewControllerExtensions.swift; sourceTree = "<group>"; };
 		11B041CD2631D50500BD4982 /* GitSpace.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GitSpace.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		11B041D02631D50500BD4982 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		11B041D22631D50500BD4982 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -164,6 +168,14 @@
 				1128A4D226334ACA0073A40A /* ApiUserProfileGateway.swift */,
 			);
 			path = ApiGateways;
+			sourceTree = "<group>";
+		};
+		1128A4EA263448DE0073A40A /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				1128A4EB263448EF0073A40A /* UIViewControllerExtensions.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 		11B041C42631D50500BD4982 = {
@@ -275,9 +287,11 @@
 		11B042412631D99100BD4982 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				1128A4EA263448DE0073A40A /* Extensions */,
 				11B0424D2631D9AC00BD4982 /* Configurable.swift */,
 				11B0426B2631E7C900BD4982 /* Reusable.swift */,
 				11B042702631F8AC00BD4982 /* CellConfiguration.swift */,
+				1128A4E5263447750073A40A /* KeyboardResponsive.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -468,6 +482,7 @@
 				1128A4CE26334A1B0073A40A /* UserProfileGateway.swift in Sources */,
 				11B0423B2631D90B00BD4982 /* UserProfileRouter.swift in Sources */,
 				11B042712631F8AC00BD4982 /* CellConfiguration.swift in Sources */,
+				1128A4EC263448EF0073A40A /* UIViewControllerExtensions.swift in Sources */,
 				11B0424E2631D9AC00BD4982 /* Configurable.swift in Sources */,
 				11B041D12631D50500BD4982 /* AppDelegate.swift in Sources */,
 				1128A48F2632FDFD0073A40A /* UserListGateway.swift in Sources */,
@@ -476,6 +491,7 @@
 				11B0423A2631D90B00BD4982 /* UserProfilePresenter.swift in Sources */,
 				1128A4942632FE830073A40A /* ApiUserListGateway.swift in Sources */,
 				1128A4782632F9800073A40A /* UserNotedCellModel.swift in Sources */,
+				1128A4E6263447750073A40A /* KeyboardResponsive.swift in Sources */,
 				11B041D32631D50500BD4982 /* SceneDelegate.swift in Sources */,
 				1128A4D326334ACA0073A40A /* ApiUserProfileGateway.swift in Sources */,
 				11B042772631F9D200BD4982 /* UserNormalCellModel.swift in Sources */,

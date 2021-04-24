@@ -71,6 +71,9 @@ extension UsersListController {
 extension UsersListController {
     
     private func setup() {
+        if #available(iOS 13.0, *) {
+            overrideUserInterfaceStyle = .light
+        }
         view.backgroundColor = .white
         navigationController?.setNavigationBarHidden(true, animated: false)
         addSubviews()
