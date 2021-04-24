@@ -9,6 +9,7 @@ import Foundation
 
 protocol UserListUseCase {
     func fetchUsers(since id: Int, completion: @escaping UserListCompletion)
+    func saveUsers(_ users: [GithubUserEntity])
 }
 
 struct UserListUseCaseImpl: UserListUseCase {
@@ -22,6 +23,10 @@ struct UserListUseCaseImpl: UserListUseCase {
     
     func fetchUsers(since id: Int, completion: @escaping UserListCompletion) {
         gateway.fetchUsers(since: id, completion: completion)
+    }
+    
+    func saveUsers(_ users: [GithubUserEntity]) {
+        gateway.saveUsers(users)
     }
     
 }

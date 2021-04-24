@@ -18,6 +18,10 @@ struct ApiUserListGateway: UserListGateway {
         Fetcher<[GithubUserEntity]>(url: url).fetch(completion: completion)
     }
     
+    func saveUsers(_ users: [GithubUserEntity]) {
+        // NOTE: Not used
+    }
+    
 }
 
 struct InvalidUrlError: Error {

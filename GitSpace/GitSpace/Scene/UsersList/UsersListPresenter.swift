@@ -23,7 +23,8 @@ class UsersListPresenterImpl: UsersListPresenter {
     private weak var view: UsersListView?
     private var router: UsersListRouter
             
-    private let userListUseCase: UserListUseCase
+    private let apiUserListUseCase: UserListUseCase
+    private let cacheUserListUseCase: UserListUseCase
     
     var tableDataSource: [UserCell] = .init() {
         didSet {
@@ -38,26 +39,48 @@ class UsersListPresenterImpl: UsersListPresenter {
     init(
         view: UsersListView,
         router: UsersListRouter,
-        userListUseCase: UserListUseCase
+        apiUserListUseCase: UserListUseCase,
+        cacheUserListUseCase: UserListUseCase
     ) {
         self.view = view
         self.router = router
-        self.userListUseCase = userListUseCase
+        self.apiUserListUseCase = apiUserListUseCase
+        self.cacheUserListUseCase = cacheUserListUseCase
     }
     
     func viewDidLoad() {
-        userListUseCase.fetchUsers(since: 0) { [weak self] response in
+        loadCachedUsers()
+        fetchUsers()
+    }
+    
+    private func loadCachedUsers() {
+        cacheUserListUseCase.fetchUsers(since: 0) { [weak self] response in
             guard let self = self else { return }
             DispatchQueue.main.async {
                 switch response {
                 case .success(let users):
-                    self.tableDataSource = users.map { UserNormalCellModel(id: $0.id, username: $0.login, details: "Details", avatarUrl: $0.avatar_url) }
+                    self.tableDataSource = users.sorted(by: { $0.id < $1.id })
+                                                .map { UserNormalCellModel(id: $0.id, username: $0.login, details: "Details", avatarUrl: $0.avatar_url) }
                 case .failure(let error):
                     print(error.localizedDescription)
                 }
             }
         }
-        
+    }
+    
+    private func fetchUsers() {
+        apiUserListUseCase.fetchUsers(since: 0) { [weak self] response in
+            guard let self = self else { return }
+            DispatchQueue.main.async {
+                switch response {
+                case .success(let users):
+                    self.tableDataSource = users.map { UserNormalCellModel(id: $0.id, username: $0.login, details: "Details", avatarUrl: $0.avatar_url) }
+                    self.cacheUserListUseCase.saveUsers(users)
+                case .failure(let error):
+                    print(error.localizedDescription)
+                }
+            }
+        }
     }
     
     func didSelectItem(at index: Int) {
@@ -66,7 +89,7 @@ class UsersListPresenterImpl: UsersListPresenter {
     }
     
     func shouldLoadNextPage() {
-        userListUseCase.fetchUsers(since: lastUserId) { [weak self] response in
+        apiUserListUseCase.fetchUsers(since: lastUserId) { [weak self] response in
             guard let self = self else { return }
             DispatchQueue.main.async {
                 switch response {
@@ -74,6 +97,7 @@ class UsersListPresenterImpl: UsersListPresenter {
                     self.tableDataSource.append(
                         contentsOf: users.map { UserNormalCellModel(id: $0.id, username: $0.login, details: "Details", avatarUrl: $0.avatar_url) }
                     )
+                    self.cacheUserListUseCase.saveUsers(users)
                 case .failure(let error):
                     print(error.localizedDescription)
                 }

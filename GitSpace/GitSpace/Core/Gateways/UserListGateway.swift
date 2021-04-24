@@ -11,4 +11,5 @@ typealias UserListCompletion = (_ result: Result<[GithubUserEntity], Error>) -> 
 
 protocol UserListGateway {
     func fetchUsers(since id: Int, completion: @escaping UserListCompletion)
+    func saveUsers(_ users: [GithubUserEntity])
 }
