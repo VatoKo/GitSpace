@@ -121,6 +121,21 @@ extension UsersListController: UITableViewDelegate {
         presenter.didSelectItem(at: indexPath.row)
     }
     
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        let isLastCell = indexPath.row == presenter.tableDataSource.count - 1
+        if isLastCell {
+            let loader = UIActivityIndicatorView(style: .gray)
+            loader.frame = .init(x: .zero, y: .zero, width: tableView.bounds.width, height: 50.0)
+            loader.startAnimating()
+
+            tableView.tableFooterView = loader
+            tableView.tableFooterView?.isHidden = false
+        } else {
+            tableView.tableFooterView = nil
+            tableView.tableFooterView?.isHidden = true
+        }
+    }
+    
 }
 
 // MARK: UITableViewDataSource
@@ -135,6 +150,11 @@ extension UsersListController: UITableViewDataSource {
         let dequeued = tableView.dequeueReusableCell(withIdentifier: model.cellIdentifier, for: indexPath)
         let cell = dequeued as! CellViewModel
         cell.configure(with: model)
+        
+        let isLastCell = indexPath.row == presenter.tableDataSource.count - 1
+        if isLastCell {
+            presenter.shouldLoadNextPage()
+        }
         return dequeued
     }
     

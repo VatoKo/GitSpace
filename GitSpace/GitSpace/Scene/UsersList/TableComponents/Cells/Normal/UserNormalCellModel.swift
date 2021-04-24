@@ -8,6 +8,7 @@
 import UIKit
 
 protocol UserCell: CellModel {
+    var id: Int { get set }
     var username: String { get set }
 }
 
@@ -17,7 +18,7 @@ struct UserNormalCellModel: UserCell {
         UserNormalCell.reuseIdentifier
     }
     
-    let id: Int
+    var id: Int
     var username: String
     let details: String
     let avatarUrl: String

@@ -15,6 +15,7 @@ protocol UsersListPresenter {
     var tableDataSource: [UserCell] { get set }
     func viewDidLoad()
     func didSelectItem(at index: Int)
+    func shouldLoadNextPage()
 }
 
 class UsersListPresenterImpl: UsersListPresenter {
@@ -28,6 +29,10 @@ class UsersListPresenterImpl: UsersListPresenter {
         didSet {
             view?.reloadList()
         }
+    }
+    
+    private var lastUserId: Int {
+        return tableDataSource.sorted(by: { $0.id < $1.id }).last?.id ?? 0
     }
     
     init(
@@ -46,7 +51,7 @@ class UsersListPresenterImpl: UsersListPresenter {
             DispatchQueue.main.async {
                 switch response {
                 case .success(let users):
-                    self.tableDataSource = users.map { UserNormalCellModel(id: $0.id, username: $0.login, details: "", avatarUrl: $0.avatar_url) }
+                    self.tableDataSource = users.map { UserNormalCellModel(id: $0.id, username: $0.login, details: "Details", avatarUrl: $0.avatar_url) }
                 case .failure(let error):
                     print(error.localizedDescription)
                 }
@@ -58,6 +63,22 @@ class UsersListPresenterImpl: UsersListPresenter {
     func didSelectItem(at index: Int) {
         let itemModel = tableDataSource[index]
         router.navigateToUserProfile(with: itemModel.username)
+    }
+    
+    func shouldLoadNextPage() {
+        userListUseCase.fetchUsers(since: lastUserId) { [weak self] response in
+            guard let self = self else { return }
+            DispatchQueue.main.async {
+                switch response {
+                case .success(let users):
+                    self.tableDataSource.append(
+                        contentsOf: users.map { UserNormalCellModel(id: $0.id, username: $0.login, details: "Details", avatarUrl: $0.avatar_url) }
+                    )
+                case .failure(let error):
+                    print(error.localizedDescription)
+                }
+            }
+        }
     }
     
 }

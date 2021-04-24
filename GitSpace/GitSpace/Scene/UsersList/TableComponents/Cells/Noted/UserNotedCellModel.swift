@@ -13,7 +13,7 @@ struct UserNotedCellModel: UserCell {
         return UserNotedCell.reuseIdentifier
     }
     
-    let id: Int
+    var id: Int
     var username: String
     let details: String
     let avatarUrl: String
