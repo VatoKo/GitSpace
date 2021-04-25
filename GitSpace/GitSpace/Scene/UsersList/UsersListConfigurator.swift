@@ -18,12 +18,14 @@ class UsersListConfiguratorImpl: UsersListConfigurator {
         
         let apiUserListUseCase = UserListUseCaseImpl(gateway: ApiUserListGateway())
         let cacheUserListUseCase = UserListUseCaseImpl(gateway: CacheUserListGateway())
+        let cacheNotesUseCase = NotesUseCaseImpl(gateway: CacheNotesGateway())
         
         let presenter: UsersListPresenter = UsersListPresenterImpl(
             view: controller,
             router: router,
             apiUserListUseCase: apiUserListUseCase,
-            cacheUserListUseCase: cacheUserListUseCase
+            cacheUserListUseCase: cacheUserListUseCase,
+            cacheNotesUseCase: cacheNotesUseCase
         )
         
         controller.presenter = presenter

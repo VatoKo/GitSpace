@@ -26,6 +26,12 @@
 		1128A509263596670073A40A /* UserInvertedCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1128A508263596670073A40A /* UserInvertedCell.swift */; };
 		1128A50E263596A20073A40A /* UserInvertedCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1128A50D263596A20073A40A /* UserInvertedCellModel.swift */; };
 		1128A513263597E40073A40A /* UIImageExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1128A512263597E40073A40A /* UIImageExtensions.swift */; };
+		1128A5212635BE6A0073A40A /* Note.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1128A5202635BE6A0073A40A /* Note.swift */; };
+		1128A5262635C0C60073A40A /* NoteEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1128A5252635C0C60073A40A /* NoteEntity.swift */; };
+		1128A52B2635C5640073A40A /* NotesGateway.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1128A52A2635C5640073A40A /* NotesGateway.swift */; };
+		1128A5302635C5B50073A40A /* CacheNotesGateway.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1128A52F2635C5B50073A40A /* CacheNotesGateway.swift */; };
+		1128A5352635C6360073A40A /* NotesUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1128A5342635C6360073A40A /* NotesUseCase.swift */; };
+		1128A53B2635CCA30073A40A /* UIAlertControllerExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1128A53A2635CCA30073A40A /* UIAlertControllerExtensions.swift */; };
 		11B041D12631D50500BD4982 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11B041D02631D50500BD4982 /* AppDelegate.swift */; };
 		11B041D32631D50500BD4982 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11B041D22631D50500BD4982 /* SceneDelegate.swift */; };
 		11B041DB2631D50500BD4982 /* GitSpace.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 11B041D92631D50500BD4982 /* GitSpace.xcdatamodeld */; };
@@ -85,6 +91,12 @@
 		1128A508263596670073A40A /* UserInvertedCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInvertedCell.swift; sourceTree = "<group>"; };
 		1128A50D263596A20073A40A /* UserInvertedCellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInvertedCellModel.swift; sourceTree = "<group>"; };
 		1128A512263597E40073A40A /* UIImageExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageExtensions.swift; sourceTree = "<group>"; };
+		1128A5202635BE6A0073A40A /* Note.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Note.swift; sourceTree = "<group>"; };
+		1128A5252635C0C60073A40A /* NoteEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteEntity.swift; sourceTree = "<group>"; };
+		1128A52A2635C5640073A40A /* NotesGateway.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotesGateway.swift; sourceTree = "<group>"; };
+		1128A52F2635C5B50073A40A /* CacheNotesGateway.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CacheNotesGateway.swift; sourceTree = "<group>"; };
+		1128A5342635C6360073A40A /* NotesUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotesUseCase.swift; sourceTree = "<group>"; };
+		1128A53A2635CCA30073A40A /* UIAlertControllerExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIAlertControllerExtensions.swift; sourceTree = "<group>"; };
 		11B041CD2631D50500BD4982 /* GitSpace.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GitSpace.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		11B041D02631D50500BD4982 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		11B041D22631D50500BD4982 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -143,6 +155,7 @@
 			children = (
 				1128A48E2632FDFD0073A40A /* UserListGateway.swift */,
 				1128A4CD26334A1B0073A40A /* UserProfileGateway.swift */,
+				1128A52A2635C5640073A40A /* NotesGateway.swift */,
 			);
 			path = Gateways;
 			sourceTree = "<group>";
@@ -152,6 +165,7 @@
 			children = (
 				1128A4982632FF910073A40A /* UserListUseCase.swift */,
 				1128A4D726334BCF0073A40A /* UserProfileUseCase.swift */,
+				1128A5342635C6360073A40A /* NotesUseCase.swift */,
 			);
 			path = UseCases;
 			sourceTree = "<group>";
@@ -161,6 +175,7 @@
 			children = (
 				1128A4882632FCC40073A40A /* GithubUserEntity.swift */,
 				1128A4C8263349990073A40A /* GithubUserProfileEntity.swift */,
+				1128A5252635C0C60073A40A /* NoteEntity.swift */,
 			);
 			path = Entities;
 			sourceTree = "<group>";
@@ -187,6 +202,7 @@
 			children = (
 				1128A4EB263448EF0073A40A /* UIViewControllerExtensions.swift */,
 				1128A512263597E40073A40A /* UIImageExtensions.swift */,
+				1128A53A2635CCA30073A40A /* UIAlertControllerExtensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -195,6 +211,7 @@
 			isa = PBXGroup;
 			children = (
 				1128A4F1263474C40073A40A /* User.swift */,
+				1128A5202635BE6A0073A40A /* Note.swift */,
 			);
 			path = CacheEntities;
 			sourceTree = "<group>";
@@ -211,6 +228,7 @@
 			isa = PBXGroup;
 			children = (
 				1128A503263483950073A40A /* CacheUserListGateway.swift */,
+				1128A52F2635C5B50073A40A /* CacheNotesGateway.swift */,
 			);
 			path = CacheGateways;
 			sourceTree = "<group>";
@@ -517,6 +535,7 @@
 				11B0422C2631D8FB00BD4982 /* UsersListPresenter.swift in Sources */,
 				1128A4892632FCC40073A40A /* GithubUserEntity.swift in Sources */,
 				1128A4732632F7650073A40A /* UserNotedCell.swift in Sources */,
+				1128A5302635C5B50073A40A /* CacheNotesGateway.swift in Sources */,
 				11B0423D2631D90B00BD4982 /* UserProfileConfigurator.swift in Sources */,
 				1128A4FB263476AD0073A40A /* Cacher.swift in Sources */,
 				11B0422E2631D8FB00BD4982 /* UsersListController.swift in Sources */,
@@ -524,7 +543,9 @@
 				1128A4C9263349990073A40A /* GithubUserProfileEntity.swift in Sources */,
 				1128A509263596670073A40A /* UserInvertedCell.swift in Sources */,
 				11B0426C2631E7C900BD4982 /* Reusable.swift in Sources */,
+				1128A5352635C6360073A40A /* NotesUseCase.swift in Sources */,
 				1128A4992632FF910073A40A /* UserListUseCase.swift in Sources */,
+				1128A53B2635CCA30073A40A /* UIAlertControllerExtensions.swift in Sources */,
 				1128A4CE26334A1B0073A40A /* UserProfileGateway.swift in Sources */,
 				11B0423B2631D90B00BD4982 /* UserProfileRouter.swift in Sources */,
 				11B042712631F8AC00BD4982 /* CellConfiguration.swift in Sources */,
@@ -533,9 +554,11 @@
 				11B0424E2631D9AC00BD4982 /* Configurable.swift in Sources */,
 				11B041D12631D50500BD4982 /* AppDelegate.swift in Sources */,
 				1128A48F2632FDFD0073A40A /* UserListGateway.swift in Sources */,
+				1128A5212635BE6A0073A40A /* Note.swift in Sources */,
 				1128A4812632FADE0073A40A /* Fetcher.swift in Sources */,
 				1128A4D826334BCF0073A40A /* UserProfileUseCase.swift in Sources */,
 				1128A504263483950073A40A /* CacheUserListGateway.swift in Sources */,
+				1128A5262635C0C60073A40A /* NoteEntity.swift in Sources */,
 				11B0423A2631D90B00BD4982 /* UserProfilePresenter.swift in Sources */,
 				1128A4942632FE830073A40A /* ApiUserListGateway.swift in Sources */,
 				1128A4782632F9800073A40A /* UserNotedCellModel.swift in Sources */,
@@ -544,6 +567,7 @@
 				1128A4D326334ACA0073A40A /* ApiUserProfileGateway.swift in Sources */,
 				11B042772631F9D200BD4982 /* UserNormalCellModel.swift in Sources */,
 				11B0423C2631D90B00BD4982 /* UserProfileController.swift in Sources */,
+				1128A52B2635C5640073A40A /* NotesGateway.swift in Sources */,
 				11B0422D2631D8FB00BD4982 /* UsersListRouter.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

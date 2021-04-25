@@ -26,6 +26,7 @@ class UsersListPresenterImpl: UsersListPresenter {
             
     private let apiUserListUseCase: UserListUseCase
     private let cacheUserListUseCase: UserListUseCase
+    private let cacheNotesUseCase: NotesUseCase
     
     var searchValue: String = String() {
         didSet {
@@ -57,19 +58,25 @@ class UsersListPresenterImpl: UsersListPresenter {
         return tableDataSource.sorted(by: { $0.id < $1.id }).last?.id ?? 0
     }
     
+    private var userNotes = [NoteEntity]()
+    
     init(
         view: UsersListView,
         router: UsersListRouter,
         apiUserListUseCase: UserListUseCase,
-        cacheUserListUseCase: UserListUseCase
+        cacheUserListUseCase: UserListUseCase,
+        cacheNotesUseCase: NotesUseCase
     ) {
         self.view = view
         self.router = router
         self.apiUserListUseCase = apiUserListUseCase
         self.cacheUserListUseCase = cacheUserListUseCase
+        self.cacheNotesUseCase = cacheNotesUseCase
     }
     
     func viewDidLoad() {
+        registerForNotesUpdate()
+        loadNotes()
         loadCachedUsers()
         fetchUsers()
     }
@@ -106,6 +113,18 @@ class UsersListPresenterImpl: UsersListPresenter {
         }
     }
     
+    private func loadNotes() {
+        cacheNotesUseCase.fetchNotes { [weak self] response in
+            guard let self = self else { return }
+            switch response {
+            case .success(let notes):
+                self.userNotes = notes
+            case .failure(_):
+                break
+            }
+        }
+    }
+    
     func didSelectItem(at index: Int) {
         let itemModel = tableDataSource[index]
         router.navigateToUserProfile(with: itemModel.username)
@@ -132,11 +151,28 @@ class UsersListPresenterImpl: UsersListPresenter {
     }
     
     private func getCellModel(at index: Int, entity: GithubUserEntity) -> UserCell {
-        if index % 4 == 3 {
+        if userNotes.contains(where: { $0.id == entity.id}) {
+            return UserNotedCellModel(id: entity.id, username: entity.login, details: "Details", avatarUrl: entity.avatar_url)
+        } else if index % 4 == 3 {
             return UserInvertedCellModel(id: entity.id, username: entity.login, details: "Details", avatarUrl: entity.avatar_url)
         } else {
             return UserNormalCellModel(id: entity.id, username: entity.login, details: "Details", avatarUrl: entity.avatar_url)
         }
     }
     
+    private func registerForNotesUpdate() {
+        NotificationCenter.default.addObserver(self, selector: #selector(notesUpdated), name: .notesDidUpdate, object: nil)
+    }
+    
+    @objc
+    private func notesUpdated() {
+        print("notes updated")
+        loadNotes()
+        loadCachedUsers()
+    }
+    
+}
+
+extension Notification.Name {
+    static let notesDidUpdate = NSNotification.Name("NOTES_DID_UPDATE")
 }

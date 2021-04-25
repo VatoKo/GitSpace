@@ -17,11 +17,13 @@ class UserProfileConfiguratorImpl: UserProfileConfigurator {
         let router: UserProfileRouter = UserProfileRouterImpl(controller)
         
         let userProfileUseCase = UserProfileUseCaseImpl(gateway: ApiUserProfileGateway())
+        let cacheNotesUseCase = NotesUseCaseImpl(gateway: CacheNotesGateway())
         
         let presenter: UserProfilePresenter = UserProfilePresenterImpl(
             view: controller,
             router: router,
             userProfileUseCase: userProfileUseCase,
+            cacheNotesUseCase: cacheNotesUseCase,
             username: username
         )
         

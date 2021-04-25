@@ -32,6 +32,15 @@ class Cacher<ManagedEntity, Entity> where ManagedEntity: NSManagedObject,
     
     init() {}
     
+    func storeInCache(newObject: Entity) {
+        container?.performBackgroundTask({ (context) in
+            context.perform {
+                _ = newObject.toManagedObject(with: context)
+                try? context.save()
+            }
+        })
+    }
+    
     func storeInCache(contentsOf array: [Entity]) {
         container?.performBackgroundTask({ (context) in
             context.perform {

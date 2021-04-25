@@ -18,11 +18,10 @@ extension GithubUserEntity: CoreDataStorable {
     typealias ManagedObject = User
     
     func toManagedObject(with context: NSManagedObjectContext) -> User {
-        let personMO = User(context: context)
-        personMO.id = Int32(self.id)
-        personMO.username = self.login
-        personMO.avatarUrl = self.avatar_url
-        
-        return personMO
+        let userMO = User(context: context)
+        userMO.id = Int32(self.id)
+        userMO.username = self.login
+        userMO.avatarUrl = self.avatar_url        
+        return userMO
     }
 }

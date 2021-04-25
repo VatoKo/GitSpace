@@ -164,7 +164,6 @@ extension UserProfileController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        hideKeyboardOnBlankTap()
         addKeyboardNotificationListeners()
         setupKeyboardResponsiveLayout()
         setup()
@@ -269,7 +268,7 @@ extension UserProfileController {
     
     @objc
     private func saveButtonDidTap() {
-        print("Save button did tap")
+        presenter?.didTapSave()
     }
     
 }
@@ -279,6 +278,11 @@ extension UserProfileController: UserProfileView {
     var pageTitle: String {
         get { title ?? "" }
         set { title = newValue }
+    }
+    
+    var noteText: String {
+        get { noteInput.text }
+        set { noteInput.text = newValue }
     }
     
     func configure(with profileInfo: GithubUserProfileEntity) {
@@ -298,6 +302,10 @@ extension UserProfileController: UserProfileView {
         nameLabel.text = "Name: \(profileInfo.name)"
         companyLabel.text = "Company: \(profileInfo.company ?? "N/A")"
         blogLabel.text = "Blog: \(profileInfo.blog.isEmpty ? "N/A" : profileInfo.blog)"
+    }
+    
+    func showPopup(title: String?, text: String?) {
+        UIAlertController.showSimplePopup(title: title, text: text, from: self)
     }
     
 }
