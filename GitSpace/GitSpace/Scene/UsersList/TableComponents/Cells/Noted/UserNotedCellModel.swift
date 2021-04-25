@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct UserNotedCellModel: UserCell {
+class UserNotedCellModel: UserCell {
     
     var cellIdentifier: String {
         return UserNotedCell.reuseIdentifier
@@ -17,5 +17,12 @@ struct UserNotedCellModel: UserCell {
     var username: String
     let details: String
     let avatarUrl: String
+    var avatarData: Data?
     
+    init(id: Int, username: String, details: String, avatarUrl: String) {
+        self.id = id
+        self.username = username
+        self.details = details
+        self.avatarUrl = avatarUrl
+    }
 }

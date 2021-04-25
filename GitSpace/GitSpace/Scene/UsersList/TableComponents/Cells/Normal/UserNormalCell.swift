@@ -117,11 +117,16 @@ extension UserNormalCell: CellViewModel {
         if let model = model as? UserNormalCellModel {
             usernameLabel.text = model.username
             detailsLabel.text = model.details
-            if let url = URL(string: model.avatarUrl) {
-                DispatchQueue.global().async {
-                    if let imageData = try? Data(contentsOf: url) {
-                        DispatchQueue.main.async {
-                            self.userAvatar.image = UIImage(data: imageData)
+            if let avatarData = model.avatarData {
+                userAvatar.image = UIImage(data: avatarData)
+            } else {
+                if let url = URL(string: model.avatarUrl) {
+                    DispatchQueue.global().async {
+                        if let imageData = try? Data(contentsOf: url) {
+                            DispatchQueue.main.async {
+                                self.userAvatar.image = UIImage(data: imageData)
+                                model.avatarData = imageData
+                            }
                         }
                     }
                 }
