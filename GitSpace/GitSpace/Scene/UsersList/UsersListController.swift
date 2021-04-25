@@ -44,6 +44,7 @@ class UsersListController: UIViewController {
         tableView.dataSource = self
         tableView.register(UserNormalCell.self)
         tableView.register(UserNotedCell.self)
+        tableView.register(UserInvertedCell.self)
         return tableView
     }()
 

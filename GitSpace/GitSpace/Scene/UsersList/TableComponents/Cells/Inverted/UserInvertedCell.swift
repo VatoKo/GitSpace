@@ -1,13 +1,13 @@
 //
-//  UserNotedCell.swift
+//  UserInvertedCell.swift
 //  GitSpace
 //
-//  Created by Vakhtang Kostava on 23.04.21.
+//  Created by Vakhtang Kostava on 25.04.21.
 //
 
 import UIKit
 
-class UserNotedCell: UITableViewCell {
+class UserInvertedCell: UITableViewCell {
     
     // MARK: Internal Components
     
@@ -51,17 +51,10 @@ class UserNotedCell: UITableViewCell {
         return label
     }()
     
-    private let noteIcon: UIImageView = {
-        let imageView = UIImageView()
-        imageView.translatesAutoresizingMaskIntoConstraints = false
-        imageView.image = UIImage(named: "note")
-        return imageView
-    }()
-    
 }
 
 // MARK: UIView Lifecycle
-extension UserNotedCell {
+extension UserInvertedCell {
     
     override func didMoveToSuperview() {
         super.didMoveToSuperview()
@@ -76,7 +69,7 @@ extension UserNotedCell {
 }
 
 // MARK: Setup
-extension UserNotedCell {
+extension UserInvertedCell {
     
     private func setup() {
         selectionStyle = .none
@@ -90,7 +83,6 @@ extension UserNotedCell {
         containerView.addSubview(textContainerStack)
         textContainerStack.addArrangedSubview(usernameLabel)
         textContainerStack.addArrangedSubview(detailsLabel)
-        containerView.addSubview(noteIcon)
     }
     
     private func setupConstraints() {
@@ -112,31 +104,24 @@ extension UserNotedCell {
             textContainerStack.leadingAnchor.constraint(equalTo: userAvatar.trailingAnchor, constant: 8),
             textContainerStack.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 16),
             textContainerStack.bottomAnchor.constraint(equalTo: containerView.bottomAnchor, constant: -16),
-            textContainerStack.trailingAnchor.constraint(equalTo: noteIcon.leadingAnchor, constant: -8)
-        ])
-        
-        NSLayoutConstraint.activate([
-            noteIcon.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -16),
-            noteIcon.centerYAnchor.constraint(equalTo: containerView.centerYAnchor),
-            noteIcon.widthAnchor.constraint(equalTo: noteIcon.heightAnchor),
-            noteIcon.widthAnchor.constraint(equalToConstant: 25)
+            textContainerStack.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -8)
         ])
     }
     
 }
 
 // MARK: Configuration
-extension UserNotedCell: CellViewModel {
+extension UserInvertedCell: CellViewModel {
         
     func configure(with model: CellModel) {
-        if let model = model as? UserNotedCellModel {
+        if let model = model as? UserInvertedCellModel {
             usernameLabel.text = model.username
             detailsLabel.text = model.details
             if let url = URL(string: model.avatarUrl) {
                 DispatchQueue.global().async {
                     if let imageData = try? Data(contentsOf: url) {
                         DispatchQueue.main.async {
-                            self.userAvatar.image = UIImage(data: imageData)
+                            self.userAvatar.image = UIImage(data: imageData)?.inverseImage(cgResult: false)
                         }
                     }
                 }

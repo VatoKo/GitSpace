@@ -23,6 +23,9 @@
 		1128A4F2263474C40073A40A /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1128A4F1263474C40073A40A /* User.swift */; };
 		1128A4FB263476AD0073A40A /* Cacher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1128A4FA263476AD0073A40A /* Cacher.swift */; };
 		1128A504263483950073A40A /* CacheUserListGateway.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1128A503263483950073A40A /* CacheUserListGateway.swift */; };
+		1128A509263596670073A40A /* UserInvertedCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1128A508263596670073A40A /* UserInvertedCell.swift */; };
+		1128A50E263596A20073A40A /* UserInvertedCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1128A50D263596A20073A40A /* UserInvertedCellModel.swift */; };
+		1128A513263597E40073A40A /* UIImageExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1128A512263597E40073A40A /* UIImageExtensions.swift */; };
 		11B041D12631D50500BD4982 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11B041D02631D50500BD4982 /* AppDelegate.swift */; };
 		11B041D32631D50500BD4982 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11B041D22631D50500BD4982 /* SceneDelegate.swift */; };
 		11B041DB2631D50500BD4982 /* GitSpace.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 11B041D92631D50500BD4982 /* GitSpace.xcdatamodeld */; };
@@ -79,6 +82,9 @@
 		1128A4F1263474C40073A40A /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		1128A4FA263476AD0073A40A /* Cacher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cacher.swift; sourceTree = "<group>"; };
 		1128A503263483950073A40A /* CacheUserListGateway.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CacheUserListGateway.swift; sourceTree = "<group>"; };
+		1128A508263596670073A40A /* UserInvertedCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInvertedCell.swift; sourceTree = "<group>"; };
+		1128A50D263596A20073A40A /* UserInvertedCellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInvertedCellModel.swift; sourceTree = "<group>"; };
+		1128A512263597E40073A40A /* UIImageExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageExtensions.swift; sourceTree = "<group>"; };
 		11B041CD2631D50500BD4982 /* GitSpace.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GitSpace.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		11B041D02631D50500BD4982 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		11B041D22631D50500BD4982 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -180,6 +186,7 @@
 			isa = PBXGroup;
 			children = (
 				1128A4EB263448EF0073A40A /* UIViewControllerExtensions.swift */,
+				1128A512263597E40073A40A /* UIImageExtensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -359,6 +366,8 @@
 		11B042612631E71700BD4982 /* Inverted */ = {
 			isa = PBXGroup;
 			children = (
+				1128A508263596670073A40A /* UserInvertedCell.swift */,
+				1128A50D263596A20073A40A /* UserInvertedCellModel.swift */,
 			);
 			path = Inverted;
 			sourceTree = "<group>";
@@ -503,6 +512,7 @@
 			files = (
 				11B0422F2631D8FB00BD4982 /* UsersListConfigurator.swift in Sources */,
 				11B041DB2631D50500BD4982 /* GitSpace.xcdatamodeld in Sources */,
+				1128A513263597E40073A40A /* UIImageExtensions.swift in Sources */,
 				11B042642631E73700BD4982 /* UserNormalCell.swift in Sources */,
 				11B0422C2631D8FB00BD4982 /* UsersListPresenter.swift in Sources */,
 				1128A4892632FCC40073A40A /* GithubUserEntity.swift in Sources */,
@@ -512,11 +522,13 @@
 				11B0422E2631D8FB00BD4982 /* UsersListController.swift in Sources */,
 				1128A4F2263474C40073A40A /* User.swift in Sources */,
 				1128A4C9263349990073A40A /* GithubUserProfileEntity.swift in Sources */,
+				1128A509263596670073A40A /* UserInvertedCell.swift in Sources */,
 				11B0426C2631E7C900BD4982 /* Reusable.swift in Sources */,
 				1128A4992632FF910073A40A /* UserListUseCase.swift in Sources */,
 				1128A4CE26334A1B0073A40A /* UserProfileGateway.swift in Sources */,
 				11B0423B2631D90B00BD4982 /* UserProfileRouter.swift in Sources */,
 				11B042712631F8AC00BD4982 /* CellConfiguration.swift in Sources */,
+				1128A50E263596A20073A40A /* UserInvertedCellModel.swift in Sources */,
 				1128A4EC263448EF0073A40A /* UIViewControllerExtensions.swift in Sources */,
 				11B0424E2631D9AC00BD4982 /* Configurable.swift in Sources */,
 				11B041D12631D50500BD4982 /* AppDelegate.swift in Sources */,

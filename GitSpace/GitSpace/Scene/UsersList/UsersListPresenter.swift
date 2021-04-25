@@ -60,7 +60,8 @@ class UsersListPresenterImpl: UsersListPresenter {
                 switch response {
                 case .success(let users):
                     self.tableDataSource = users.sorted(by: { $0.id < $1.id })
-                                                .map { UserNormalCellModel(id: $0.id, username: $0.login, details: "Details", avatarUrl: $0.avatar_url) }
+                                                .enumerated()
+                                                .map { index, item -> UserCell in self.getCellModel(at: index, entity: item) }
                 case .failure(let error):
                     print(error.localizedDescription)
                 }
@@ -74,7 +75,8 @@ class UsersListPresenterImpl: UsersListPresenter {
             DispatchQueue.main.async {
                 switch response {
                 case .success(let users):
-                    self.tableDataSource = users.map { UserNormalCellModel(id: $0.id, username: $0.login, details: "Details", avatarUrl: $0.avatar_url) }
+                    self.tableDataSource = users.enumerated()
+                                                .map { index, item -> UserCell in self.getCellModel(at: index, entity: item) }
                     self.cacheUserListUseCase.saveUsers(users)
                 case .failure(let error):
                     print(error.localizedDescription)
@@ -95,13 +97,22 @@ class UsersListPresenterImpl: UsersListPresenter {
                 switch response {
                 case .success(let users):
                     self.tableDataSource.append(
-                        contentsOf: users.map { UserNormalCellModel(id: $0.id, username: $0.login, details: "Details", avatarUrl: $0.avatar_url) }
+                        contentsOf: users.enumerated()
+                                         .map { index, item -> UserCell in self.getCellModel(at: index, entity: item) }
                     )
                     self.cacheUserListUseCase.saveUsers(users)
                 case .failure(let error):
                     print(error.localizedDescription)
                 }
             }
+        }
+    }
+    
+    private func getCellModel(at index: Int, entity: GithubUserEntity) -> UserCell {
+        if index % 4 == 3 {
+            return UserInvertedCellModel(id: entity.id, username: entity.login, details: "Details", avatarUrl: entity.avatar_url)
+        } else {
+            return UserNormalCellModel(id: entity.id, username: entity.login, details: "Details", avatarUrl: entity.avatar_url)
         }
     }
     
