@@ -12,6 +12,7 @@ protocol UsersListView: AnyObject {
 }
 
 protocol UsersListPresenter {
+    var searchValue: String { get set }
     var tableDataSource: [UserCell] { get set }
     func viewDidLoad()
     func didSelectItem(at index: Int)
@@ -26,9 +27,29 @@ class UsersListPresenterImpl: UsersListPresenter {
     private let apiUserListUseCase: UserListUseCase
     private let cacheUserListUseCase: UserListUseCase
     
-    var tableDataSource: [UserCell] = .init() {
+    var searchValue: String = String() {
         didSet {
             view?.reloadList()
+        }
+    }
+    
+    private var dataSource: [UserCell] = .init() {
+        didSet {
+            view?.reloadList()
+        }
+    }
+    
+    var tableDataSource: [UserCell] {
+        get {
+            if searchValue.isEmpty {
+                return dataSource
+            } else {
+                return dataSource.filter { $0.username.contains(searchValue) }
+            }
+        }
+        
+        set {
+            dataSource = newValue
         }
     }
     
@@ -91,6 +112,8 @@ class UsersListPresenterImpl: UsersListPresenter {
     }
     
     func shouldLoadNextPage() {
+        guard searchValue.isEmpty else { return }
+        
         apiUserListUseCase.fetchUsers(since: lastUserId) { [weak self] response in
             guard let self = self else { return }
             DispatchQueue.main.async {

@@ -19,9 +19,11 @@ class UsersListController: UIViewController {
     }()
     
     // TODO: Search icon doesn't look good. FIX IT
-    private let searchField: UITextField = {
+    private lazy var searchField: UITextField = {
         let input = UITextField()
         input.translatesAutoresizingMaskIntoConstraints = false
+        input.delegate = self
+        input.clearButtonMode = .whileEditing
         input.placeholder = "Search"
         input.layer.masksToBounds = true
         input.layer.borderColor = UIColor.black.cgColor
@@ -79,6 +81,7 @@ extension UsersListController {
         navigationController?.setNavigationBarHidden(true, animated: false)
         addSubviews()
         setupConstraints()
+        addTargets()
     }
     
     private func addSubviews() {
@@ -109,6 +112,20 @@ extension UsersListController {
         ])
     }
     
+    private func addTargets() {
+        searchField.addTarget(self, action: #selector(textfieldTextDidChange(_:)), for: .editingChanged)
+    }
+    
+}
+
+// MARK: Touch Events
+extension UsersListController {
+    
+    @objc
+    private func textfieldTextDidChange(_ textfield: UITextField) {
+        presenter.searchValue = textfield.text ?? String()
+    }
+    
 }
 
 // MARK: UITableViewDelegate
@@ -124,7 +141,7 @@ extension UsersListController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         let isLastCell = indexPath.row == presenter.tableDataSource.count - 1
-        if isLastCell {
+        if isLastCell, searchField.text?.isEmpty ?? true {
             let loader = UIActivityIndicatorView(style: .gray)
             loader.frame = .init(x: .zero, y: .zero, width: tableView.bounds.width, height: 50.0)
             loader.startAnimating()
@@ -157,6 +174,16 @@ extension UsersListController: UITableViewDataSource {
             presenter.shouldLoadNextPage()
         }
         return dequeued
+    }
+    
+}
+
+// MARK: UITextFieldDelegate
+extension UsersListController: UITextFieldDelegate {
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        self.view.endEditing(true)
+        return false
     }
     
 }
